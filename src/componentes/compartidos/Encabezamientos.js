@@ -1,16 +1,25 @@
+import estilos from './Encabezamiento.module.css';
+import { ReactComponent as PerfilSVG } from './img/perfil.svg'
+import { ReactComponent as LogoSVG } from './img/logo.svg'
+import Vinculo from './Vinculo';
+
+
+
 function Encabezamiento() {
   return (
-    <div>
-      <div>
-        <img src="https://i.pinimg.com/736x/8b/cd/c2/8bcdc22d6b797b48555a5e293e0d9a21.jpg" width={100} height={100}></img>
-        <a href="/">Turnos Mimos</a>
+    <header className={estilos.encabezamiento}>
+      <div className={estilos.contenedor}>
+        <LogoSVG className={estilos.logo} />
+        <a className={estilos.titulo} href="/">Turnos Mimos</a>
       </div>
       <div>
         <nav>
-        <a href="/perfil">Perfil</a>
-      </nav>
+          <Vinculo
+            href="/perfil"
+            Icono={PerfilSVG} />
+        </nav>
       </div>
-    </div>
+    </header>
   );
 }
 

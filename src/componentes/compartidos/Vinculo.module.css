@@ -1,0 +1,11 @@
+.icono {
+    @apply mr-2 h-10 w-10; 
+}
+
+.vinculo {
+    @apply flex items-center px-4 h-xl hover:bg-gray-200;
+}
+
+.texto {
+    @apply ml-2 text-sm font-semibold text-gray-900;
+}
