@@ -8,11 +8,11 @@ function Principal({ children }) {
     <div className={estilos.principal}>
       <aside className={estilos.aside}>
         <Vinculo
-          href="/lista"
+          to="/lista"
           texto="Lista Turnos"
           Icono={ListaSVG} />
         <Vinculo
-          href="/nuevo"
+          to="/nuevo"
           texto="Nuevo Turno"
           Icono={NuevoSVG} />
       </aside>
