@@ -4,18 +4,24 @@ import Layout from './componentes/compartidos/Layout';
 import NoEncontrado from './componentes/compartidos/NoEncontrado';
 import Lista from './componentes/lista/Lista';
 import Detalles from './componentes/nuevo/Detalles';
+import Modal from './componentes/compartidos/Modal';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Lista />}/>
-        <Route path="/lista" element={<Lista />}/>
-        <Route path="/nuevo" element={<Detalles />}/>     
+        <Route index element={<Lista />} />
+        <Route path="/lista" element={<Lista />}>
+          <Route path="/lista/:id" element={
+            <Modal>
+              <Detalles />
+            </Modal>} />
+        </Route>
+        <Route path="/nuevo" element={<Detalles />} />
       </Route>
-      <Route path="*" element={<NoEncontrado />}/>
+      <Route path="*" element={<NoEncontrado />} />
     </Routes>
-    
+
   );
 }
 

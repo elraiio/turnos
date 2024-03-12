@@ -1,8 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import estilos from "./Detalles.module.css";
+import { Contexto } from "../../servicios/Memoria";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 function Detalles() {
+
+    const { id } = useParams();
+
+
     const [form, setForm] = useState({
         detalles: '',
         fechaDisponible: '2024-05-04',
@@ -13,6 +19,9 @@ function Detalles() {
         pago: "transferencia",
 
     });
+
+    const [estado, enviar] = useContext(Contexto);
+
     const { detalles, fechaDisponible, horario, servicios, fechaAlternativa, icono, pago } = form;
 
     const onChange = (event, prop) => {
@@ -20,11 +29,33 @@ function Detalles() {
     }
 
     useEffect(() => {
-        //console.log(form);
-    }, [form]);
+        const metaMemoria = estado.objetos[id];
+        if(!id) return;
+        if (!metaMemoria) {
+            return navegar('/lista');
+        }
+        setForm(estado.objetos[id]);
+    }, [id]);
 
-    const crear = async () => {
-        console.log(form);
+    const navegar = useNavigate();
+
+
+    const crear = () => {
+        enviar({ tipo: 'crear', meta: form });
+        navegar('/lista');
+    }
+
+    const actualizar = () => {
+        enviar({ tipo: 'actualizar', meta: form });
+        navegar('/lista');
+    }
+    const borrar = () => {
+        enviar({ tipo: 'borrar', id });
+        navegar('/lista');
+    }
+
+    const cancelar = () => {
+        navegar('/lista');
     }
 
     const opcionDeHorario = ["mañana", "siesta", "tarde"];
@@ -102,11 +133,22 @@ function Detalles() {
                 </label>
             </form>
             <div className={estilos.botones}>
-                <button
+                {!id && <button
                     className="boton boton--negro"
                     onClick={crear}
-                >Crear</button>
-                <button className="boton boton--gris">Cancelar</button>
+                >Crear</button>}
+                 {id && <button
+                    className="boton boton--negro"
+                    onClick={actualizar}
+                >Actualizar</button>}
+                 {id && <button
+                    className="boton boton--rojo"
+                    onClick={borrar}
+                >Borrar</button>}
+                <button 
+                className="boton boton--gris"
+                onClick={cancelar}
+                >Cancelar</button>
             </div>
         </div>
     );

@@ -11,7 +11,7 @@
 }
 
 .boton--rojo {
-  @apply text-red-500 nm-flat-gray-100 border;
+  @apply text-red-500 nm-flat-gray-100 border hover:bg-red-500 hover:text-white;
 }
 
 .boton--gris {
