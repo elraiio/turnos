@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import estilos from './Meta.module.css';
 
-function Meta({id, icono, eventos, periodo, detalles, disponible, completado}) {
+function Meta({id, icono, eventos, periodo, detalles, meta, completado}) {
 
     return (
         <Link to ={`/lista/${id}`} className={estilos.meta + " tarjeta"}>
@@ -13,9 +13,9 @@ function Meta({id, icono, eventos, periodo, detalles, disponible, completado}) {
             </div>
             <div className="flex">
                 <div className="relative m-2 mx-5">
-                    <p className="text-center">{completado} de {disponible}</p>
+                    <p className="text-center">{completado} de {meta}</p>
                     <div className={estilos.barra1}>
-                        <div style={{width: `${Math.round((completado/disponible) * 100)}%` }} 
+                        <div style={{width: `${Math.round((completado/meta) * 100)}%` }} 
                         className={estilos.barra2}></div>
                     </div>
                 </div>

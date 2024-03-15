@@ -5,8 +5,24 @@ import NoEncontrado from './componentes/compartidos/NoEncontrado';
 import Lista from './componentes/lista/Lista';
 import Detalles from './componentes/nuevo/Detalles';
 import Modal from './componentes/compartidos/Modal';
+import { useContext, useEffect } from 'react';
+import { pedirMetas } from './servicios/Pedidos';
+import { Contexto } from './servicios/Memoria';
 
 function App() {
+  
+  const [, enviar] = useContext(Contexto);
+
+  useEffect(() => {
+    pedirMetas()
+      .then((metas) => {
+        enviar({ tipo: 'colocar', metas });
+      })
+      .catch((error) => {
+        console.error('Error al obtener las metas:', error);
+      });
+  }, [enviar]);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -21,7 +37,6 @@ function App() {
       </Route>
       <Route path="*" element={<NoEncontrado />} />
     </Routes>
-
   );
 }
 
